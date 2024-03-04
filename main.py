@@ -88,7 +88,7 @@ def new_post(title, content, link, post_status, terms_names_post_tag, terms_name
         post_status = post_status, 
         terms_names_post_tag = terms_names_post_tag, 
         terms_names_category = terms_names_category,
-        dateCreated=date
+        date=date
         )
     # 创建文章并获取响应结果
     res = te.new_post(post_obj, True)
@@ -109,7 +109,7 @@ def edit_post(id, title, content, link, post_status, terms_names_post_tag, terms
         post_status, 
         terms_names_post_tag, 
         terms_names_category,
-        dateCreated=date
+        date
         )
     res = te.edit_post(post_obj, post_id=int(id), publish=True)
     # 判断是否修改成功
@@ -269,8 +269,9 @@ def main():
             terms_names_post_tag = metadata.get("tags",  domain_name)
             terms_names_post_tag = ', '.join(terms_names_post_tag)
             terms_names_category = metadata.get("categories", domain_name)
-            date_str = metadata.get("date", "")
-            publish_date = datetime.now() if not date_str else date_str
+            publish_date = metadata.get("date", "")
+            if not publish_date:
+                publish_date = datetime.now()
             post_status = "publish"
             link = urllib.parse.quote(sha1_key , safe='').lower() 
             # content = markdown.markdown(content + href_info("https://"+domain_name+"/p/"+link+"/"), extensions=['tables', 'fenced_code'])
