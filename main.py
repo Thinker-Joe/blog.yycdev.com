@@ -270,7 +270,7 @@ def main():
             terms_names_post_tag = ', '.join(terms_names_post_tag)
             terms_names_category = metadata.get("categories", domain_name)
             date_str = metadata.get("date", "")
-            publish_date = datetime.now() if not date_str else datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            publish_date = datetime.now() if not date_str else date_str
             post_status = "publish"
             link = urllib.parse.quote(sha1_key , safe='').lower() 
             # content = markdown.markdown(content + href_info("https://"+domain_name+"/p/"+link+"/"), extensions=['tables', 'fenced_code'])
