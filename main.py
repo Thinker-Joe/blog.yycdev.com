@@ -101,14 +101,16 @@ def new_post(title, content, link, post_status, terms_names_post_tag, terms_name
         return FAIL 
 
 # 更新文章
-def edit_post(id, title, content, link, post_status, terms_names_post_tag, terms_names_category):
+def edit_post(id, title, content, link, post_status, terms_names_post_tag, terms_names_category, date):
     post_obj = create_post_obj(
         title, 
         content, 
         link, 
         post_status, 
         terms_names_post_tag, 
-        terms_names_category)
+        terms_names_category,
+        dateCreated=date
+        )
     res = te.edit_post(post_obj, post_id=int(id), publish=True)
     # 判断是否修改成功
     if res and isinstance(res, int) and res == int(id):
